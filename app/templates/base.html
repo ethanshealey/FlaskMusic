@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Editorial by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="{{url_for('index')}}" class="logo"><strong>Flask Music</strong> by Ethan Shealey</a>
+									<ul class="icons">
+										<li><a href="https://www.github.com/ethanshealey" class="icon brands fa-github"><span class="label">Github</span></a></li>
+										
+									</ul>
+								</header>
+
+							{% block content %}{% endblock %}
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search for a Song" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="{{url_for('index')}}">Homepage</a></li>
+										<!--<li><a href="#!">My Profile</a></li>-->
+										<li><a href="#!">My Playlists</a></li>
+										<li><a href="#!">All Songs</a></li>
+										<li><a href="#!">Add a Song</a></li>
+
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Have questions about this app? Feel free to email me! I will get back to you as soon as possible!</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="mailto:ethan.shealey@gmail.com">ethan.shealey@gmail.com</a></li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Ethan Shealey. All rights reserved.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+        <!-- Scripts -->
+            <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/browser.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
+			<script src="{{url_for('static', filename='js/util.js')}}"></script>
+			<script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+	</body>
+</html>
