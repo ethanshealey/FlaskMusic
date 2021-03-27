@@ -242,7 +242,7 @@ img[alt="pause-icon"] {
   position: relative;
   align-items: center;
   border-radius: inherit;
-  background-color: #78adfe;
+  background-color: #f56a6a;
 }
 
 .progres__filled::before {
@@ -256,13 +256,13 @@ img[alt="pause-icon"] {
 }
 
 .player__playlist {
-  height: 100%;
-  overflow: auto;
+  height:400px;
+  overflow: scroll;
   padding: 1.05em 0.9em 0 1.2em;
 }
 
 .player__playlist::-webkit-scrollbar {
-  width: 0;
+  width: 5px;
 }
 
 .player__song {

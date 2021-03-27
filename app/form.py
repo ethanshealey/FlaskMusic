@@ -1,6 +1,6 @@
 from app.models import User
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 
 class LoginForm(FlaskForm):
@@ -24,3 +24,11 @@ class RegisterForm(FlaskForm):
 class SearchSongForm(FlaskForm):
     song = StringField('Song Name', validators=[DataRequired()])
     submit = SubmitField('Search')
+
+class AddSongForm(FlaskForm):
+    song_url = StringField('YouTube URL', validators=[DataRequired()])
+    song_name = StringField('Song Name', validators=[DataRequired()])
+    song_artist = StringField('Song Artist', validators=[DataRequired()])
+    song_album = StringField('Song Album')
+    song_album_art = FileField('Album Art Upload')
+    submit = SubmitField('Add Song')

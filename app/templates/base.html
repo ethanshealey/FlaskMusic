@@ -6,10 +6,11 @@
 -->
 <html>
 	<head>
-		<title>Editorial by HTML5 UP</title>
+		<title>{{title}} | Ethan's Music Player</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}" />
+		<link rel="icon" href="{{url_for('static', filename='images/icon.png')}}">
 	</head>
 	<body class="is-preload">
 
@@ -37,7 +38,7 @@
 
 							<!-- Search -->
 								<section id="search" class="alt">
-									<form method="post" action="#">
+									<form method="post" action="{{url_for('add')}}">
 										<input type="text" name="query" id="query" placeholder="Search for a Song" />
 									</form>
 								</section>
@@ -49,10 +50,16 @@
 									</header>
 									<ul>
 										<li><a href="{{url_for('index')}}">Homepage</a></li>
-										<!--<li><a href="#!">My Profile</a></li>-->
+										{% if current_user.is_authenticated %}
 										<li><a href="#!">My Playlists</a></li>
-										<li><a href="#!">All Songs</a></li>
-										<li><a href="#!">Add a Song</a></li>
+										<li><a href="{{url_for('all_songs')}}">All Songs</a></li>
+										<li><a href="{{url_for('add')}}">Add a Song</a></li>
+										<li><a href="{{url_for('logout')}}">Logout</a></li>
+										{% else %}
+										<li><a href="{{url_for('login')}}">Login</a></li>
+										<li><a href="{{url_for('register')}}">Register</a></li>
+										<li><a href="{{url_for('all_songs')}}">All Songs</a></li>
+										{% endif %}
 
 									</ul>
 								</nav>
@@ -84,6 +91,8 @@
 			<script src="{{url_for('static', filename='js/breakpoints.min.js')}}"></script>
 			<script src="{{url_for('static', filename='js/util.js')}}"></script>
 			<script src="{{url_for('static', filename='js/main.js')}}"></script>
+			<script src="{{url_for('static', filename='js/musicplayer.js')}}"></script>
+
 
 	</body>
 </html>

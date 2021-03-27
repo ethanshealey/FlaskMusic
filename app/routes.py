@@ -1,15 +1,49 @@
 from app import app, db
 import requests
+import datetime
 from bs4 import BeautifulSoup
-from flask import render_template, flash, redirect, url_for
-from app.form import LoginForm, RegisterForm, SearchSongForm
+import os
+from flask import render_template, flash, redirect, url_for, request
+from app.form import LoginForm, RegisterForm, SearchSongForm, AddSongForm
 from flask_login import current_user, login_user, logout_user
 from app.models import User, Song
+from werkzeug.utils import secure_filename
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    songs = db.session.query(Song).order_by(Song.date_added).limit(10).all()
-    return render_template('index.html', songs=songs)
+    songs = db.session.query(Song).order_by(Song.date_added.desc()).limit(5).all()
+    return render_template('index.html', title='Homepage', songs=songs)
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    form=AddSongForm()
+    if form.validate_on_submit():
+
+        # Get the song from YouTube
+        SongName = form.song_url.data
+        SongFileName = form.song_name.data.replace(' ', '')
+        os.system('youtube-dl --extract-audio --audio-format mp3 -o "' + SongFileName + '.mp3" ' + SongName)
+        os.system('mv ' + SongFileName + '.mp3 app/static/music')
+
+
+        # Save the image
+        f = form.song_album_art.data
+        filename = secure_filename(f.filename)
+        filename = '/Users/ethanshealey/Documents/GitHub/FlaskMusic/app/static/images/' + filename
+        f.save(filename)
+
+        s = Song(song_name=form.song_name.data, song_artist=form.song_artist.data, song_album=form.song_album.data, song_path='music/' + SongFileName + '.mp3', song_album_art='images/' + secure_filename(f.filename), date_added=datetime.date.today())
+        db.session.add(s)
+        db.session.commit()
+
+        flash(form.song_name.data + ' added successfully!')
+        return redirect(url_for('index'))
+    return render_template('add.html', title='Add a new song', form=form)
+
+@app.route('/songs')
+def all_songs():
+    songs = db.session.query(Song).order_by(Song.song_name).all()
+    return render_template('songs.html', title='All Songs', songs=songs)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -28,7 +62,7 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('index'), title='Register')
 
     form = RegisterForm()
 
