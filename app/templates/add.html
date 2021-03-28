@@ -35,8 +35,36 @@
         {{form.song_album_art.label}}
         {{form.song_album_art()}}
         </p>
-        {{form.submit()}}
+        {{form.submit(id="just_load_please")}}
     </form>
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <div class="loader"></div>
+          <div clas="loader-txt">
+            <p>Please wait while we get that song!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+      $(document).ready(function() {
+        $("#just_load_please").on("click", function(e) {
+            e.preventDefault();
+            $("#loadMe").modal({
+                backdrop: "static", //remove ability to close modal with click
+                keyboard: false, //remove option to close with keyboard
+                show: true //Display loader!
+            });
+        });
+      });
+  </script>
 
 {% endblock %}

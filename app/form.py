@@ -26,9 +26,9 @@ class SearchSongForm(FlaskForm):
     submit = SubmitField('Search')
 
 class AddSongForm(FlaskForm):
-    song_url = StringField('YouTube URL', validators=[DataRequired()])
-    song_name = StringField('Song Name', validators=[DataRequired()])
-    song_artist = StringField('Song Artist', validators=[DataRequired()])
-    song_album = StringField('Song Album')
+    song_url = StringField('YouTube URL', validators=[DataRequired()], render_kw={'placeholder': 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'})
+    song_name = StringField('Song Name', validators=[DataRequired()], render_kw={'placeholder': 'Never Give You Up'})
+    song_artist = StringField('Song Artist', validators=[DataRequired()], render_kw={'placeholder': 'Rick Astley'})
+    song_album = StringField('Song Album', render_kw={'placeholder': 'Never Give You Up'})
     song_album_art = FileField('Album Art Upload')
     submit = SubmitField('Add Song')

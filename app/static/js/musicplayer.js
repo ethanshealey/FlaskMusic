@@ -85,7 +85,7 @@ function changeSliderContext() {
     ".player__song-name"
   ).textContent;
 
-  if (sliderName.textContent.length > 16) {
+  if (sliderName.textContent.length > 1111130) {
     const textWrap = document.createElement("span");
     textWrap.className = "text-wrap";
     textWrap.innerHTML =
@@ -94,7 +94,7 @@ function changeSliderContext() {
     sliderName.append(textWrap);
   }
 
-  if (sliderTitle.textContent.length >= 18) {
+  if (sliderTitle.textContent.length >= 11111130) {
     const textWrap = document.createElement("span");
     textWrap.className = "text-wrap";
     textWrap.innerHTML =
